@@ -2,39 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <meta name="text-scale" content="scale">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none'; base-uri 'none'">
   <title>Tab Window Limiter</title>
   <style>
+    :root {
+      color-scheme: light dark;
+      --page-bg: #fff;
+      --page-text: #111;
+      --button-bg: #fff;
+      --button-bg-hover: #f2f2f2;
+      --error: #8a1f11;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page-bg: #1c1c1c;
+        --page-text: #f2f2f2;
+        --button-bg: #1c1c1c;
+        --button-bg-hover: #2a2a2a;
+        --error: #ffb4a8;
+      }
+    }
     body {
       margin: 0;
-      font: 14px/1.4 Arial, sans-serif;
-      color: #111;
-      background: #fff;
+      font: 0.875rem/1.4 Arial, sans-serif;
+      color: var(--page-text);
+      background: var(--page-bg);
     }
     main {
-      width: 320px;
-      padding: 12px;
+      width: 20rem;
+      padding: 0.75rem;
       box-sizing: border-box;
     }
     h1 {
-      margin: 0 0 8px;
-      font-size: 16px;
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      text-wrap: balance;
     }
     button {
       width: 100%;
       font: inherit;
-      color: #111;
-      background: #fff;
-      border: 1px solid #111;
-      border-radius: 4px;
-      padding: 8px 10px;
+      color: var(--page-text);
+      background: var(--button-bg);
+      border: 1px solid var(--page-text);
+      border-radius: 0.25rem;
+      padding: 0.5rem 0.625rem;
       cursor: pointer;
     }
     button:hover {
-      background: #f2f2f2;
+      background: var(--button-bg-hover);
     }
     button:focus-visible {
-      outline: 2px solid #111;
-      outline-offset: 2px;
+      outline: 0.125rem solid var(--page-text);
+      outline-offset: 0.125rem;
     }
     button:disabled {
       cursor: default;
@@ -44,29 +65,45 @@
     #limits,
     #preview-note,
     #error {
-      margin: 8px 0 0;
+      margin: 0.5rem 0 0;
+    }
+    #status {
+      min-block-size: 2.8em;
+      text-wrap: pretty;
+    }
+    #limits,
+    #preview-note {
+      text-wrap: pretty;
     }
     #error {
-      color: #8a1f11;
+      color: var(--error);
     }
     .counts {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 4px 12px;
-      margin: 12px 0 0;
+      gap: 0.25rem 0.75rem;
+      margin: 0.75rem 0 0;
     }
     output {
       font: inherit;
       margin: 0;
+    }
+    @media (forced-colors: active) {
+      button {
+        border-color: ButtonText;
+        background: ButtonFace;
+        color: ButtonText;
+      }
+      button:focus-visible {
+        outline-color: Highlight;
+      }
     }
   </style>
 </head>
 <body>
   <main>
     <h1>Tab Window Limiter</h1>
-    <button id="tabWindowLimiter" type="button" data-testid="limiter-toggle" aria-describedby="limits">
-      Loading limiter
-    </button>
+    <button id="tabWindowLimiter" type="button" data-testid="limiter-toggle" aria-describedby="status">Loading limiter</button>
     <p id="status" role="status" aria-live="polite" data-testid="limiter-status">Loading limiter status.</p>
     <div class="counts">
       <label for="tabs">Unpinned tabs</label>

@@ -31,6 +31,7 @@ Open the toolbar button **Tab Window Limiter**.
 - **Unpinned tabs** and **Normal windows** are the numbers the limit uses.
 - **All windows** is the same count as the toolbar badge.
 - The status line under the button updates after every click.
+- Colors follow the system light or dark setting. Light mode stays black text on white.
 
 ## Change the limits
 

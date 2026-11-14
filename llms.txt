@@ -21,6 +21,7 @@ Chromium extension that caps normal browser windows and unpinned tabs. There is 
 - All windows (same number as the badge): id `windows`, data-testid `window-count`.
 - What the limits mean: id `limits`.
 - Errors: id `error`, role alert.
+- The popup follows the system light or dark color scheme. The pause button's accessible description is the status line.
 
 ## Develop
 

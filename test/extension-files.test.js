@@ -16,6 +16,7 @@ test('the unpacked extension still loads from src with no build output', async (
   assert.equal(manifest.background.type, 'module');
   assert.equal(manifest.action.default_popup, 'popup.html');
   assert.equal(manifest.incognito, 'spanning');
+  assert.equal(manifest.content_security_policy.extension_pages, "script-src 'self'; object-src 'self'");
   assert.ok(manifest.permissions.includes('tabs'));
   assert.ok(manifest.permissions.includes('storage'));
 
@@ -47,6 +48,13 @@ test('the unpacked extension still loads from src with no build output', async (
     'data-testid="window-count"',
     'data-testid="limiter-status"',
     'aria-live="polite"',
+    'aria-describedby="status"',
+    'name="color-scheme" content="light dark"',
+    'name="text-scale" content="scale"',
+    'script-src \'self\'',
+    'color-scheme: light dark',
+    'prefers-color-scheme: dark',
+    'forced-colors: active',
     'src="popup.js"',
   ]) {
     assert.equal(html.includes(hook), true, `popup.html is missing ${hook}`);
